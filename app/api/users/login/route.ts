@@ -33,9 +33,18 @@ export async function POST (request:NextRequest){
         }
 
         const token = signToken(tokendata)
-        return NextResponse.json({
-            tokendata,token
+        const response =  NextResponse.json({
+            message:"Login Successful",
+            success:true,
+            tokendata,
+            token
         },{status:200})
+
+        response.cookies.set("token",token,
+            {httpOnly:true}
+        )
+
+        return response;
         
         
     } catch (error:any) {
