@@ -1,5 +1,6 @@
 'use client'
 import axios from 'axios'
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import React, { useState } from 'react'
@@ -43,38 +44,45 @@ const SignUp= () => {
 
 
   return (
-    <form className='border-0 border- mt-[15vw] border-amber-50 w-[40%] mx-auto h-[30vh] flex flex-col justify-center items-center gap-2 '>
+    <>
+        <form className='border-2 rounded-md   mt-[10vh] lg:mt-[10vw]  border-amber-50 lg:w-[40%] mx-auto h-[50vh] flex flex-col justify-center items-center gap-2 '>
 
-        <h1 className='text-xl text-white font-bold '> Sign Up Page </h1>
-        <input className='bg-amber-50 w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md' 
-        type="text" 
-        name='username'
-        placeholder='username'
-        value={user.username}  
-        onChange={onChangeHandler} 
-        />
+            <h1 className='text-xl text-white font-bold '> Sign Up Page </h1>
+            <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md' 
+            type="text" 
+            name='username'
+            placeholder='username'
+            value={user.username}  
+            onChange={onChangeHandler} 
+            />
 
-        <input className='bg-amber-50 w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
-        type="email" 
-        name='email'
-        placeholder='email'
-        value={user.email}  
-        onChange={onChangeHandler}    />
+            <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
+            type="email" 
+            name='email'
+            placeholder='email'
+            value={user.email}  
+            onChange={onChangeHandler}    />
 
-        <input className='bg-amber-50 w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
-        type="password" 
-        name='password'
-        placeholder='password'
-        value={user.password}  
-        onChange={onChangeHandler} 
-        />
+            <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
+            type="password" 
+            name='password'
+            placeholder='password'
+            value={user.password}  
+            onChange={onChangeHandler} 
+            />
 
-        <button className=' bg-blue-700 mt-1.5 px-3 py-1.5 rounded-md font-bold hover:bg-blue-900'
-        onClick={onSubmitHandler}
-        >
-            SignUp
-        </button>
-    </form>
+            <button className=' bg-blue-700 mt-2 px-3 py-1.5 rounded-md font-bold hover:bg-blue-900'
+            onClick={onSubmitHandler}
+            >
+                SignUp
+            </button>
+
+            <a className='pt-2 cursor-pointer ' onClick={()=>{router.push('/client/login')}} >Visit Login page</a>
+
+        </form>
+        
+    </>
+
   )
 }
 
