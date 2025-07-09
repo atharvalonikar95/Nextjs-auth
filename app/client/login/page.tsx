@@ -1,7 +1,10 @@
 'use client'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { NextResponse } from 'next/server';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
 
 const userData={
     email:'',
@@ -10,6 +13,8 @@ const userData={
 
 const Login = () => {
 
+  const router=useRouter();
+  const dispatch = useDispatch();
   const[user,setUser]=useState(userData);
 
   const onChangeHandler=(e:any)=>{
@@ -23,7 +28,11 @@ const Login = () => {
       const response= await axios.post('/api/users/login',user)
       console.log(response.data);
       const token = response.data.token;
-      localStorage.setItem('token', token); 
+      localStorage.setItem('token', token);
+      console.log(response.data.tokendata);
+      dispatch(login(response.data.tokendata))
+      router.push('/client/dashboard')
+      
     } catch (error:any) {
       console.log(error.message);
       return NextResponse.json({message:"Login Failed ",error:error.message},
@@ -62,8 +71,8 @@ const Login = () => {
                 Login
             </button>
 
-            <a className='pt-2 cursor-pointer '  >Forgot password</a>
-            {/* onClick={()=>{router.push('/client/login')}}. */}
+            {/* <a onClick={()=>{router.push('/client/dashboard')}} className='pt-2 cursor-pointer '  >Dashboard</a> */}
+            
         </form>
         
     </>
