@@ -1,10 +1,12 @@
-// store/ReduxProvider.tsx
-'use client';
+'use client'
 
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider, useSelector } from 'react-redux';
+import store, { RootState } from './store';
 
 
 export default function ReduxProvider({ children }: { children: React.ReactNode }) {
-  return <Provider store={store}>{children}</Provider>;
+  // const mode = useSelector((state:RootState)=>state.theme.mode)
+  return  <Provider store={store} >
+              {children}
+          </Provider>;
 }

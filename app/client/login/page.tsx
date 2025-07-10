@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 const userData={
     email:'',
@@ -12,7 +13,7 @@ const userData={
 }
 
 const Login = () => {
-
+  const [showPassword,setShowPassword]=useState(false)
   const router=useRouter();
   const dispatch = useDispatch();
   const[user,setUser]=useState(userData);
@@ -45,8 +46,8 @@ const Login = () => {
   }
 
   return (
-    <>
-        <form className='border-2 rounded-md   mt-[10vh] lg:mt-[10vw]  border-amber-50 lg:w-[40%] mx-auto h-[50vh] flex flex-col justify-center items-center gap-2 '>
+    <div className='lg:h-[80vh] lg:flex flex-col justify-center items-center  '>
+        <form className='border-2 rounded-md     border-amber-50 lg:w-[40%] mx-auto h-[50vh]  flex flex-col justify-center items-center gap-2 '>
 
             <h1 className='text-xl text-white font-bold '> Login Page </h1>
 
@@ -57,25 +58,33 @@ const Login = () => {
             value={user.email}  
             onChange={onChangeHandler}    />
 
-            <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
-            type="password" 
-            name='password'
-            placeholder='password'
-            value={user.password}  
-            onChange={onChangeHandler} 
-            />
+            <div className='relative w-full flex flex-row items-center'>
+                <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md ' 
+                type={showPassword?`text`:`password`}
+                name='password'
+                placeholder='password'
+                value={user.password}  
+                onChange={onChangeHandler} 
+                />
 
-            <button className=' bg-blue-700 mt-2 px-3 py-1.5 rounded-md font-bold hover:bg-blue-900'
+                <button type='button' onClick={()=>setShowPassword(!showPassword)} className='absolute top-1/3 lg:right-50 right-29 '>
+                {showPassword?<EyeIcon/>:<EyeOffIcon/>}
+                </button>
+
+
+            </div>
+
+            <button className='  cursor-pointer bg-blue-700 mt-2 px-3 py-1.5 rounded-md font-bold hover:bg-blue-900 '
             onClick={onSubmitHandler}
             >
                 Login
             </button>
 
-            {/* <a onClick={()=>{router.push('/client/dashboard')}} className='pt-2 cursor-pointer '  >Dashboard</a> */}
+            <a onClick={()=>{router.push('/client/signup')}} className='pt-2 cursor-pointer '  >Visit Signup Page</a>
             
         </form>
         
-    </>
+    </div>
   )
 }
 

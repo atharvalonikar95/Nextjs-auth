@@ -1,9 +1,12 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { RootState } from '../store/store'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 const dashboard = () => {
+
+  const router = useRouter()
 
     const user= useSelector((state:RootState)=>state.auth.userData)
     const status = useSelector((state:RootState)=>state.auth.status)
@@ -18,7 +21,8 @@ const dashboard = () => {
             <h1>{user?.username}</h1>
           </>
         ):(
-        <p>please Login</p>
+        <p onClick={()=>{router.push('/client/login')}}>please Login</p>
+
         )
         }
 
