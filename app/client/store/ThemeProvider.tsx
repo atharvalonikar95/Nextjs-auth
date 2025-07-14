@@ -9,7 +9,7 @@ const ThemeProvider = ({ children }:{children:React.ReactNode}) => {
   return (
     <Provider store={store}>
         <div className={mode === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-500 text-black'}>
-            <div className='h-[10vh] border-2 border-black'>
+            <div >
                 <ThemeChangerButton/>
             </div>
             {children}

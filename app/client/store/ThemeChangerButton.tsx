@@ -2,16 +2,18 @@
 'use client'
 import React from 'react'
 import { RootState } from '../store/store'
-import { UseSelector,useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toggleMode } from './themeSlice'
+import { MoonIcon, SunIcon } from 'lucide-react'
 const ThemeChangerButton = () => {
 
     const mode = useSelector((state:RootState )=>state.theme.mode)
     const dispatch=useDispatch()
   return (
-    <div className={mode==='light'?`bg-white text-black h-full `:`bg-gray-800 text-white h-full `}>
-        <button onClick={()=>dispatch(toggleMode())}>
-            {mode==='light'? 'Dark Mode':'light mode'}
+    <div className={mode==='light'?`bg-white text-black h-full relative  `:`bg-gray-800 text-white h-full relative `}>
+        <button className=' top-[120] absolute mt-2 right-120 p-2 rounded-[50%] border-2 border-amber-50' onClick={()=>dispatch(toggleMode())}>
+            {mode==='light'? <MoonIcon/>:<SunIcon/>}
+            
         </button>
     </div>
   )
