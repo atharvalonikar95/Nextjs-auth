@@ -3,9 +3,11 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { NextResponse } from 'next/server';
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/authSlice';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { RootState } from '../store/store';
+
 
 const userData={
     email:'',
@@ -17,6 +19,7 @@ const Login = () => {
   const router=useRouter();
   const dispatch = useDispatch();
   const[user,setUser]=useState(userData);
+  // const mode = useSelector((state:RootState)=>state.theme.mode)
 
   const onChangeHandler=(e:any)=>{
     setUser((curr)=>({...curr,[e.target.name]:e.target.value}))
@@ -46,7 +49,7 @@ const Login = () => {
   }
 
   return (
-    <div className='lg:h-[80vh] lg:flex flex-col justify-center items-center  '>
+    <div className='  lg:mt-0 lg:h-[80vh] lg:flex flex-col justify-center items-center  '>
         <form className='border-2 rounded-md     border-amber-50 lg:w-[40%] mx-auto h-[50vh]  flex flex-col justify-center items-center gap-2 '>
 
             <h1 className='text-xl text-white font-bold '> Login Page </h1>
@@ -67,8 +70,9 @@ const Login = () => {
                 onChange={onChangeHandler} 
                 />
 
-                <button type='button' onClick={()=>setShowPassword(!showPassword)} className='absolute top-1/3 lg:right-50 right-29 '>
-                {showPassword?<EyeIcon/>:<EyeOffIcon/>}
+                <button  type='button' onClick={()=>setShowPassword(!showPassword)} 
+                className={` absolute top-1/3 lg:right-50 right-29 text-gray-700 `}>
+                {showPassword?<  EyeIcon/>:<EyeOffIcon/>}
                 </button>
 
 

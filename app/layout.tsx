@@ -5,6 +5,7 @@ import "./globals.css";
 import ReduxProvider from "./client/store/ReduxProvider";
 import ThemeProvider from "./client/store/ThemeProvider";
 import ReduxWrapperProvider from "./client/store/ReduxWrapperProvider";
+import MobileNav from "./client/NavBar/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxWrapperProvider >
+          {/* <MobileNav/> */}
             {children}
         </ReduxWrapperProvider>
       </body>
