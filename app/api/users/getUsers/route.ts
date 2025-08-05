@@ -7,14 +7,21 @@ export async function GET(request: NextRequest) {
     try {
         await dbConnect();
 
-        // const { searchParams } = new URL(request.url);
-        // const email = searchParams.get("email");
+        const { searchParams } = new URL(request.url);
+        const email = searchParams.get("email");
 
         // if (!email) {
         //     return NextResponse.json({ error: "Email is required" }, { status: 400 });
         // }
 
-        const users = await User.find({});
+        let users;
+        if(email){
+            users = await User.find({ email: { $regex: new RegExp(email, 'i') } });
+        }
+        else{
+
+            users = await User.find({});
+        } 
         return NextResponse.json(users, { status: 200 })
 
 
