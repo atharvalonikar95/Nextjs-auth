@@ -11,23 +11,23 @@ export async function PUT(request:NextRequest){
         const {searchParams}= new URL(request.url);
         const email = searchParams.get('email');
 
-         if (!email) {
-            return NextResponse.json({ error: "Email is required" }, { status: 400 });
+        if(!email){
+          return NextResponse.json({ error: "Email is required" }, { status: 400 });
         }
 
         const user = await User.find({email})
-        
-    const body = await request.json();
-    const { username } = body;
+            
+        const body = await request.json();
+        const { newEmail,newUsername } = body;
 
-    if (!username) {
+    if (!newUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 });
     }
 
     // Find user by email and update username
     const updatedUser = await User.findOneAndUpdate(
       { email },
-      { username },
+      {email:newEmail, username:newUsername },
       { new: true } // return the updated document
     );
 
