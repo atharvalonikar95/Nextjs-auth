@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { RootState } from '../store/store'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Modal from '../Modal'
+import Modal from '../Modals/Modal'
 
 const dashboard = () => {
 

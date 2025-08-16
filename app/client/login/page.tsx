@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/authSlice';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { RootState } from '../store/store';
+import LoaderModal from '../Modals/LoaderModal';
 
 
 const userData={
@@ -19,6 +20,7 @@ const Login = () => {
   const router=useRouter();
   const dispatch = useDispatch();
   const[user,setUser]=useState(userData);
+      const [loading,setLoading]=useState(false)
   // const mode = useSelector((state:RootState)=>state.theme.mode)
 
   const onChangeHandler=(e:any)=>{
@@ -27,6 +29,7 @@ const Login = () => {
 
   const onSubmitHandler= async (e:any)=>{
     e.preventDefault();
+    setLoading(true);
     
     try {
       const response= await axios.post('/api/users/login',user)
@@ -83,13 +86,16 @@ const Login = () => {
             >
                 Login
             </button>
-
+                        {
+                loading ?
+                <LoaderModal loading={loading} />
+                :
             <a onClick={()=>{router.push('/client/signup')}} className='pt-2 cursor-pointer '  >Visit Signup Page</a>
-            
+                        }
         </form>
         
     </div>
   )
 }
 
-export default Login
+export default Login;

@@ -1,9 +1,11 @@
 
 import React, { use, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from './store/store'
+// import { RootState } from './store/store'
 import axios from 'axios'
-import { updateUser } from './store/authSlice'
+import { RootState } from '../store/store'
+import { updateUser } from '../store/authSlice'
+// import { updateUser } from './store/authSlice'
 
 type props = {
   openModal: boolean
@@ -49,8 +51,9 @@ const Modal = ({ openModal, openModalHandler }: props) => {
   <>
 
     {openModal ? (
-    <div className=' fixed inset-0 bg-gray-950 opacity-[70%]  h-screen w-full transition-transform  flex flex-row items-center justify-center gap-4 border-2 border-black  z-50'>
-        <div className='bg-white w-[40%] h-[45%] flex flex-col items-center justify-center gap-4 text-black'>
+    <div className=' fixed inset-0 bg-gray-950 opacity-[70%]  h-screen w-full 
+        transition-transform  flex flex-row items-center justify-center gap-4 border-2 border-black  z-50'>
+        <div className='bg-white w-[40%] h-[55%] flex flex-col items-center justify-center gap-4 text-black '>
 
           <h2 className='text-xl font-bold text-black '>Edit User Details</h2>
 

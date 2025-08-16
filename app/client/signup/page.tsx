@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import React, { useState } from 'react'
+import LoaderModal from '../Modals/LoaderModal';
 
 
 const userData={
@@ -17,6 +18,7 @@ const SignUp= () => {
     const router=useRouter();
     const [user,setUser]=useState(userData)
     const [showPassword,setShowPassword]=useState(false)
+    const [loading,setLoading]=useState(false)
 
 
     const onChangeHandler=(e:any)=>{
@@ -26,8 +28,7 @@ const SignUp= () => {
     
     const onSubmitHandler= async (e:any)=>{
         e.preventDefault();
-
-        
+        setLoading(true);
         try {
             const response = await  axios.post("/api/users/signup",user)
             console.log("signup successful",response.data);
@@ -38,6 +39,9 @@ const SignUp= () => {
             
         } catch (error:any ) {
             console.log("signup failed",error.message);
+        }
+        finally{
+            setLoading(false);
         }
 
 
@@ -86,8 +90,13 @@ const SignUp= () => {
             >
                 SignUp
             </button>
+            {
+                loading ?
+                <LoaderModal loading={loading} />
+                :
+                <a className='pt-2 cursor-pointer ' onClick={()=>{router.push('/client/login')}} >Visit Login page</a>
+            }
 
-            <a className='pt-2 cursor-pointer ' onClick={()=>{router.push('/client/login')}} >Visit Login page</a>
 
         </form>
         
