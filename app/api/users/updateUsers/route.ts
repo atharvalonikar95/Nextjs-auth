@@ -18,7 +18,7 @@ export async function PUT(request:NextRequest){
         const user = await User.find({email})
             
         const body = await request.json();
-        const { newEmail,newUsername } = body;
+        const { newEmail,newUsername,newFirstname,newLastname,newImage } = body;
 
     if (!newUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 });
@@ -27,7 +27,13 @@ export async function PUT(request:NextRequest){
     // Find user by email and update username
     const updatedUser = await User.findOneAndUpdate(
       { email },
-      {email:newEmail, username:newUsername },
+      {
+        email:newEmail, 
+        username:newUsername,
+        firstname:newFirstname,
+        lastname:newLastname,
+        image:newImage 
+      },
       { new: true } // return the updated document
     );
 

@@ -18,7 +18,11 @@ const Modal = ({ openModal, openModalHandler }: props) => {
   const dispatch = useDispatch();
   const [formData,setFormData]=useState({
     email:user?.email ||'',
-    username:user?.username ||''
+    username:user?.username ||'',
+    firstname:user?.firstname ||'',
+    lastname:user?.lastname ||'',
+    image:user?.image ||''
+
   })
   
   
@@ -33,7 +37,10 @@ const Modal = ({ openModal, openModalHandler }: props) => {
       const url = `/api/users/updateUsers?email=${user?.email}`;
       const response = await axios.put(url,{
         newEmail: formData.email,
-        newUsername: formData.username
+        newUsername: formData.username,
+        newFirstname:formData.firstname,
+        newLastname:formData.lastname,
+        newImage:formData.image,        
     })
     
     console.log(response.data);
@@ -62,6 +69,12 @@ const Modal = ({ openModal, openModalHandler }: props) => {
 
           <input className='p-2 h-[12%] rounded-md w-[35%] border-2 border-black '
             type="text" placeholder='username' name='username' value={formData.username} onChange={formChangeHandler}  />
+
+          <input className='p-2 h-[12%] rounded-md w-[35%] border-2 border-black '
+            type="text" placeholder='firstname' name='firstname' value={formData.firstname} onChange={formChangeHandler}  />
+
+          <input className='p-2 h-[12%] rounded-md w-[35%] border-2 border-black '
+            type="text" placeholder='lastname' name='lastname' value={formData.lastname} onChange={formChangeHandler}  />
 
           <div className='w-[35%] flex flex-row gap-2 justify-between border-0 border-black  '>
             <button onClick={handleUpdateUser} className='bg-blue-400 p-2 rounded-lg hover: cursor-pointer '>save</button>

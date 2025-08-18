@@ -29,7 +29,10 @@ export async function POST (request:NextRequest){
         const tokendata ={
             id:user._id,
             username:user.username,
-            email:user.email
+            email:user.email,
+            firstname:user.firstname,
+            lastname:user.lastname,
+            image:user.image
         }
 
         const token = signToken(tokendata)

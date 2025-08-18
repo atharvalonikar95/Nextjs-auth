@@ -10,7 +10,7 @@ export async function POST(request:NextRequest){
     try{
 
         const reqBody=await request.json()
-        const {email,username,password}=reqBody
+        const {email,username,password,firstname,lastname,special_key,image}=reqBody
 
         console.log(reqBody);
 
@@ -25,8 +25,15 @@ export async function POST(request:NextRequest){
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password,salt)
 
+        let imageBuffer = null;
+        if (image) {
+        const base64Data = image.split(",")[1]; 
+         imageBuffer = Buffer.from(base64Data, "base64");
+        }
+
+
         const newUser = new User({
-            username,email,password:hashedPassword
+            username,email,firstname,lastname,special_key,password:hashedPassword,image:imageBuffer
         })
 
         await newUser.save()

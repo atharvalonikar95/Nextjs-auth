@@ -30,6 +30,9 @@ const dashboard = () => {
         <>
           <h1>{user?.email}</h1>
           <h1>{user?.username}</h1>
+          <h1>{user?.firstname}</h1>
+          <h1>{user?.lastname}</h1>
+          {/* <h1>{user?.image}</h1> */}
         </>
       ) : (
         <p onClick={() => { router.push('/client/login') }}>please Login</p>

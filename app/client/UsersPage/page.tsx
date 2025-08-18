@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react'
 
 const allUsers = () => {
     const [searchParam, setSearchParam] = useState('');
-    const [users, setUsers] = useState<{ _id: string; username: string; email: string; password: string }[]>([]);
+    const [users, setUsers] = useState<{ _id: string;
+                                         username: string; 
+                                         email: string; 
+                                         firstname: string;
+                                         lastname: string;}[]>([]);
     const loadUsers = async (email?: string) => {
         const url = email ? `/api/users/getUsers?email=${email}` : '/api/users/getUsers'
         const response = await axios.get(url)
@@ -50,7 +54,8 @@ const allUsers = () => {
                         <tr className='bg-gray-600 justify-items-center items-center '>
                             <th className='px- py-2 border-b text-md text-center'>Username</th>
                             <th className='px-2 py-2 border-b text-md text-center'>Email</th>
-                            <th className='px-2 py-2 border-b text-md text-center'>Password</th>
+                            <th className='px-2 py-2 border-b text-md text-center'>Firstname</th>
+                            <th className='px-2 py-2 border-b text-md text-center'>Lastname</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +65,9 @@ const allUsers = () => {
                                     <tr key={user._id} className='hover:bg-violet-400  ' >
                                         <td className='px-2 py-2 border-b text-md text-center '>{user.username}</td>
                                         <td className='px-2 py-2 border-b text-md text-center'>{user.email}</td>
-                                        <td className='px-2 py-2 border-b text-md text-center truncate overflow-hidden whitespace-nowrap'>{user.password}</td>
+                                        <td className='px-2 py-2 border-b text-md text-center'>{user.firstname}</td>
+                                        <td className='px-2 py-2 border-b text-md text-center'>{user.lastname}</td>                                                                                
+                                        {/* <td className='px-2 py-2 border-b text-md text-center truncate overflow-hidden whitespace-nowrap'>{user.password}</td> */}
                                     </tr>
                                 )
                             })
