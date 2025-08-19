@@ -26,13 +26,29 @@ export async function POST (request:NextRequest){
             },{status:400})
         }
 
+        let base64str=null
+        if(user.image){
+            base64str = user.image.toString('base64')
+        }
+
         const tokendata ={
+            id:user._id,
+            // username:user.username,
+            // email:user.email,
+            // firstname:user.firstname,
+            // lastname:user.lastname,
+            // image:`data:image/jpg;base64,${base64str}`
+            // image:user.image
+        }
+
+        const userData ={
             id:user._id,
             username:user.username,
             email:user.email,
             firstname:user.firstname,
             lastname:user.lastname,
-            image:user.image
+            image:`data:image/jpg;base64,${base64str}`
+            // image:user.image
         }
 
         const token = signToken(tokendata)
@@ -40,7 +56,8 @@ export async function POST (request:NextRequest){
             message:"Login Successful",
             success:true,
             tokendata,
-            token
+            token,
+            userData
         },{status:200})
 
         response.cookies.set("token",token,

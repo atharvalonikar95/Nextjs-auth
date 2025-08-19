@@ -36,8 +36,8 @@ const Login = () => {
       console.log(response.data);
       const token = response.data.token;
       localStorage.setItem('token', token);
-      console.log('this is', response.data.tokendata);
-      dispatch(login(response.data.tokendata))
+      console.log('this is', response.data.userData);
+      dispatch(login(response.data.userData))
       router.push('/client/dashboard')
       // setLoading(false);
 

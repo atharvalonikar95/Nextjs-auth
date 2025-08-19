@@ -7,7 +7,7 @@ interface UserData {
   lastname:string;
   email: string;
   id:any;
-  image:Buffer;
+  image: string ;
 }
 
 interface AuthState {

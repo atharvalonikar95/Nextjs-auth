@@ -32,7 +32,7 @@ const dashboard = () => {
           <h1>{user?.username}</h1>
           <h1>{user?.firstname}</h1>
           <h1>{user?.lastname}</h1>
-          {/* <h1>{user?.image}</h1> */}
+          <img src={user?.image} alt="img not found" height={50} width={50} />
         </>
       ) : (
         <p onClick={() => { router.push('/client/login') }}>please Login</p>
