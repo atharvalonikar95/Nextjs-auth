@@ -8,7 +8,7 @@ type props={
 const LoaderModal = ({loading}:props) => {
   return (
     <div className=' fixed inset-0 bg-gray-950 opacity-[70%]  h-screen w-full 
-        transition-transform  flex flex-row items-center justify-center gap-4 border-2 border-black  z-50'>
+        transition-transform  flex flex-row items-center justify-center gap-4 border-2 border-black  z-100'>
         <div>
             <SpinningCircles />
         </div>

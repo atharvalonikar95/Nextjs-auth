@@ -15,10 +15,23 @@ interface AuthState {
   userData: UserData | null;
 }
 
+// const initialState: AuthState = {
+//   status: false,
+//   userData: null,
+// };
+const preloadedUser = typeof window !== "undefined"
+  ? JSON.parse(localStorage.getItem("userData") || "null")
+  : null;
+
+const preloadedStatus = typeof window !== "undefined"
+  ? localStorage.getItem("status") === "true"
+  : false;
+
 const initialState: AuthState = {
-  status: false,
-  userData: null,
+  status: preloadedStatus,
+  userData: preloadedUser,
 };
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -26,12 +39,17 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.status = true,
-        state.userData = action.payload
+      state.userData = action.payload,
+      localStorage.setItem("userData", JSON.stringify(action.payload));
+      localStorage.setItem("status", "true");
+
     },
 
     logout: (state) => {
       state.status = false,
-        state.userData = null
+      state.userData = null,
+      localStorage.removeItem("userData");
+      localStorage.setItem("status", "false");
     },
     updateUser(state, action) {
       if (state.userData) {
@@ -39,6 +57,7 @@ const authSlice = createSlice({
           ...state.userData,
           ...action.payload,
         };
+      localStorage.setItem("userData", JSON.stringify(state.userData));
       }
     },
 

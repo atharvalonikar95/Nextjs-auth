@@ -15,6 +15,9 @@ const Navbar = () => {
 
         <div className='h-auto flex flex-row items-center justify-end gap-4 w-[50%] border-0 border-black'>
           <h1>{user?.username || 'user_name' }</h1>
+
+          <img className='rounded-full' src={user?.image} alt="no img" height={30} width={30} />
+
           <div className='w-fit h-auto  border-0 border-black mt-1.5 hover:border-b-amber-50 hover:border-b-1'>
             <ThemeChangerButton/>
           </div>

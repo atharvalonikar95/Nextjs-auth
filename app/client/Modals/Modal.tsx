@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { RootState } from '../store/store'
 import { updateUser } from '../store/authSlice'
+import ImgModal from './ImgModal'
+import LoaderModal from './LoaderModal'
 // import { updateUser } from './store/authSlice'
 
 type props = {
@@ -16,6 +18,9 @@ const Modal = ({ openModal, openModalHandler }: props) => {
 
   const user = useSelector((state: RootState) => state.auth.userData);
   const dispatch = useDispatch();
+  const [preview,setPreview]=useState(false);
+  const [loading,setLoading]=useState(false);
+
   const [formData, setFormData] = useState({
     email: user?.email || '',
     username: user?.username || '',
@@ -24,7 +29,6 @@ const Modal = ({ openModal, openModalHandler }: props) => {
     image: user?.image || ''
 
   })
-
 
 
   const formChangeHandler = (e: any) => {
@@ -46,6 +50,7 @@ const Modal = ({ openModal, openModalHandler }: props) => {
   };
 
   const handleUpdateUser = async () => {
+    setLoading(true);
     try {
 
       const url = `/api/users/updateUsers?email=${user?.email}`;
@@ -59,6 +64,7 @@ const Modal = ({ openModal, openModalHandler }: props) => {
 
       console.log(response.data.image);
       console.log(formData.image);
+      // setLoading(true);
       dispatch(updateUser(response.data))
 
 
@@ -66,7 +72,13 @@ const Modal = ({ openModal, openModalHandler }: props) => {
     catch (err) {
       console.log(err);
     }
+    finally{
+      setLoading(false);
+      openModalHandler();
+    }
   }
+
+
 
 
   return (
@@ -75,7 +87,7 @@ const Modal = ({ openModal, openModalHandler }: props) => {
       {openModal ? (
         <div className=' fixed inset-0 bg-gray-950 opacity-[70%]  h-screen w-full 
         transition-transform  flex flex-row items-center justify-center gap-4 border-2 border-black  z-50'>
-          <div className='bg-white w-[40%] h-[55%] flex flex-col items-center justify-center gap-4 text-black '>
+          <div className='bg-white w-[40%] opacity-[100%] h-[55%] flex flex-col items-center justify-center gap-4 text-black rounded-lg p-2'>
 
             <h2 className='text-xl font-bold text-black '>Edit User Details</h2>
 
@@ -94,11 +106,22 @@ const Modal = ({ openModal, openModalHandler }: props) => {
             <input
               type="file"
               accept="image/*"
-              className="bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md"
-              onChange={onFileChange} />
+              className="bg-amber-50 w-[35%] lg:w-[35%] mx-auto p-2 mt-2 text-black outline-black outline-1 rounded-md"
+              onChange={onFileChange}
+              onMouseEnter={()=>setPreview(true)}
+              onMouseLeave={()=>setPreview(false)}
+               />
 
+                {
+                    preview && user?.image &&(
+                        <ImgModal preview={preview} image={formData.image} />
+                    )
+                }
             <div className='w-[35%] flex flex-row gap-2 justify-between border-0 border-black  '>
               <button onClick={handleUpdateUser} className='bg-blue-400 p-2 rounded-lg hover: cursor-pointer '>save</button>
+                {loading &&
+                  <LoaderModal loading={loading} />
+                }
               <button onClick={openModalHandler} className='bg-blue-400 p-2 rounded-lg hover: cursor-pointer'>close</button>
             </div>
 
