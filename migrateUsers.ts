@@ -12,10 +12,11 @@ export async function dbConnect() {
   if (isConnected) return;
 
   try {
-    await mongoose.connect(`mongodb+srv://atharva:atharva@cluster0.6zawv4l.mongodb.net/auth`);
+    await mongoose.connect(process.env.MONGODB_URI);
     isConnected = true;
     console.log("MongoDB connected");
   } catch (error) {
+    
     console.error("MongoDB connection error:", error);
     throw error;
   }
@@ -30,10 +31,7 @@ const migrateUsers = async () => {
             {},
             {
                 $set: {
-                    special_key: null,
-                    image: null,
-                    firstname: null,
-                    lastname: null,
+                  role:'user'
                 },
             }
         );
