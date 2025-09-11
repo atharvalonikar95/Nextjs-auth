@@ -18,7 +18,7 @@ export async function PUT(request: NextRequest) {
     const user = await User.find({ email })
 
     const body = await request.json();
-    const { newEmail, newUsername, newFirstname, newLastname, newImage } = body;
+    const { newEmail, newUsername, newFirstname, newLastname, newImage,newRole } = body;
 
     if (!newUsername) {
       return NextResponse.json({ error: "Username is required" }, { status: 400 });
@@ -38,7 +38,8 @@ export async function PUT(request: NextRequest) {
         username: newUsername,
         firstname: newFirstname,
         lastname: newLastname,
-        image: base64str
+        image: base64str,
+        role:newRole
       },
       { new: true } // return the updated document
     );

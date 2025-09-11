@@ -8,6 +8,7 @@ interface UserData {
   email: string;
   id:any;
   image: string ;
+  role: string;
 }
 
 interface AuthState {

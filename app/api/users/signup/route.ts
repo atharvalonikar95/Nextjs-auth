@@ -10,7 +10,7 @@ export async function POST(request:NextRequest){
     try{
 
         const reqBody=await request.json()
-        const {email,username,password,firstname,lastname,special_key,image}=reqBody
+        const {email,username,password,firstname,lastname,special_key,image,role}=reqBody
 
         console.log(reqBody);
 
@@ -33,7 +33,7 @@ export async function POST(request:NextRequest){
 
 
         const newUser = new User({
-            username,email,firstname,lastname,special_key,password:hashedPassword,image:imageBuffer
+            username,email,firstname,lastname,special_key,password:hashedPassword,image:imageBuffer,role
         })
 
         await newUser.save()

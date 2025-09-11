@@ -16,7 +16,8 @@ const userData = {
     firstname: '',
     lastname: '',
     image: null as string | null,
-    special_key: ''
+    special_key: '',
+    role:'user'
 }
 const SignUp = () => {
 
@@ -50,6 +51,7 @@ const SignUp = () => {
     const onSubmitHandler = async (e: any) => {
         e.preventDefault();
         setLoading(true);
+        console.log(user);
         try {
             const response = await axios.post("/api/users/signup", user)
             console.log("signup successful", response.data);
@@ -113,6 +115,13 @@ const SignUp = () => {
                     name='email'
                     placeholder='email'
                     value={user.email}
+                    onChange={onChangeHandler} />
+                
+                <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md '
+                    type="text"
+                    name='role'
+                    placeholder='role'
+                    value={user.role}
                     onChange={onChangeHandler} />
 
                 <input
