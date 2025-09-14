@@ -15,14 +15,16 @@ export async function GET(request: NextRequest) {
         // }
 
         let users;
+        let userCount;
         if(email){
             users = await User.find({ email: { $regex: new RegExp(email, 'i') } });
         }
         else{
 
             users = await User.find({});
+            userCount= users.length
         } 
-        return NextResponse.json(users, { status: 200 })
+        return NextResponse.json({users}, { status: 200 })
 
 
     } catch (error: any) {

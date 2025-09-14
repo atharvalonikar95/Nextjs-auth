@@ -8,12 +8,14 @@ const allUsers = () => {
                                          username: string; 
                                          email: string; 
                                          firstname: string;
-                                         lastname: string;}[]>([]);
+                                         lastname: string;
+                                         role: string;
+                                         special_key: string;}[]>([]);
     const loadUsers = async (email?: string) => {
         const url = email ? `/api/users/getUsers?email=${email}` : '/api/users/getUsers'
         const response = await axios.get(url)
         console.log(response.data);
-        setUsers(response.data)
+        setUsers(response.data.users)
         console.log(users);
     }
 
