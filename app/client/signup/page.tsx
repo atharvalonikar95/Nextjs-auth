@@ -73,10 +73,10 @@ const SignUp = () => {
 
 
     return (
-        <div className='lg:h-[80vh] lg:flex flex-col justify-center items-center '>
-            <form className='border-2 rounded-md     border-amber-50 lg:w-[40%] mx-auto h-[50vh] flex flex-col justify-center items-center gap-2 '>
+        <div className='lg:h-[85vh] lg:flex flex-col justify-center items-center '>
+            <form className='border-2 rounded-md     border-amber-50 lg:w-[40%] mx-auto lg:mt-2 lg:h-[80vh] flex flex-col justify-center items-center gap-2 '>
 
-                <h1 className='text-xl text-white font-bold '> Sign Up Page </h1>
+                <h1 className='text-xl text-white font-bold pt-2 '> Sign Up Page </h1>
                 <input className='bg-amber-50 w-[50%] lg:w-[40%] mx-auto p-2 mt-2 text-black outline-none rounded-md'
                     type="text"
                     name='username'
@@ -135,7 +135,9 @@ const SignUp = () => {
 
                 {
                     preview && user.image &&(
-                        <ImgModal preview={preview} image={user.image} />
+                            <ImgModal preview={preview} image={user.image} />
+                        // <div className='flex flex-row items-center justify-center w-[100%]'>
+                        // </div>
                     )
                 }
 
@@ -166,7 +168,7 @@ const SignUp = () => {
                     loading ?
                         <LoaderModal loading={loading} />
                         :
-                        <a className='pt-2 cursor-pointer ' onClick={() => { router.push('/client/login') }} >Visit Login page</a>
+                        <a className='pt-2 cursor-pointer outline-0 outline-amber-50 mb-2' onClick={() => { router.push('/client/login') }} >Visit Login page</a>
                 }
 
 
